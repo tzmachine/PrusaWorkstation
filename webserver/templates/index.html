@@ -7,41 +7,47 @@
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: Helvetica;
+            background-color: #1C1E21;
             margin: 0;
+            text-align: center;
             padding: 20px;
+            color: white;
         }
         header {
-            background-color: #333;
+            background-color: #2A2A2A;
             color: white;
             padding: 10px 0;
-            text-align: center;
+            border-radius: 10px;
+            
         }
         section {
             margin: 20px 0;
         }
+        h2 {
+            text-align: center;
+        }
         footer {
             text-align: center;
             padding: 10px 0;
-            background-color: #333;
+            background-color: #2A2A2A;
             color: white;
+            border-radius: 10px;
+        }
+        .temperature {
+            color: #FA6831;
+
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Willkommen auf meiner Webseite!</h1>
+        <h1>Prusa Workstation</h1>
     </header>
 
     <section>
-        <h2>Über mich</h2>
-        <p>Hier kannst du Informationen über dich einfügen.</p>
-    </section>
-
-    <section>
-        <h2>Meine Projekte</h2>
-        <p>Liste hier deine Projekte oder Arbeiten auf.</p>
+        <h2>Chamber Temperature</h2>
+        <div class="temperature">Current Temperature</div>
     </section>
 
     <footer>
