@@ -19,7 +19,6 @@
             color: white;
             padding: 10px 0;
             border-radius: 10px;
-            
         }
         section {
             margin: 20px 0;
@@ -36,7 +35,18 @@
         }
         .temperature {
             color: #FA6831;
-
+        }
+        button {
+            background-color: #FA6831;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #E05D28;
         }
     </style>
 </head>
@@ -50,8 +60,23 @@
         <div class="temperature">Current Temperature</div>
     </section>
 
+    <section>
+        <button id="toggle-btn">Toggle GPIO</button>
+    </section>
+
     <footer>
         <p>&copy; 2024 Deine Webseite</p>
     </footer>
+
+    <script>
+        // JavaScript to send a request to the server when the button is clicked
+        document.getElementById('toggle-btn').addEventListener('click', function() {
+            fetch('/toggle_pin')
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);  // Output the response from the server
+                });
+        });
+    </script>
 </body>
 </html>
