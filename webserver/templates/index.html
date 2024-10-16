@@ -37,20 +37,17 @@
             color: #FA6831;
         }
         button {
-            background-color: rgb(28, 30, 33);
+            background-color: #1C1E21;
             color: white;
             border: 2px solid #FA6831;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            margin: 3px ;
+            margin: 3px;
         }
         button:hover {
             background-color: #212529;
-        }
-        button:active {
-            background-color: rgb(250,104,49);
         }
     </style>
 </head>
@@ -68,25 +65,36 @@
         <h3>GPIO Control</h3>
     </header>
     <section>
-        <button id="btn1" onclick="toggleButton('btn1')">GPIO 1</button>
-        <button id="btn2" onclick="toggleButton('btn2')">GPIO 2</button>
-        <button id="btn3" onclick="toggleButton('btn3')">GPIO 3</button>
-        <button id="btn4" onclick="toggleButton('btn4')">GPIO 4</button>
+        <button id="btn1" onclick="toggleButton('btn1', 1)">GPIO 1</button>
+        <button id="btn2" onclick="toggleButton('btn2', 2)">GPIO 2</button>
+        <button id="btn3" onclick="toggleButton('btn3', 3)">GPIO 3</button>
+        <button id="btn4" onclick="toggleButton('btn4', 4)">GPIO 4</button>
 
         <script>
-            function toggleButton(buttonId) {
-                // Button-Element auswählen
+            // Status der Buttons (1 = ein, 0 = aus)
+            var buttonStates = {
+                1: 0, // Button 1
+                2: 0, // Button 2
+                3: 0, // Button 3
+                4: 0  // Button 4
+            };
+
+            // Funktion zum Umschalten des Button-Zustands
+            function toggleButton(buttonId, buttonNumber) {
                 var button = document.getElementById(buttonId);
                 
-                // Aktuelle Farbe ermitteln
-                var currentColor = window.getComputedStyle(button).backgroundColor;
+                // Umschalten des Zustands (0 = aus, 1 = ein)
+                buttonStates[buttonNumber] = buttonStates[buttonNumber] === 0 ? 1 : 0;
 
-                // RGB für Hintergrundfarben prüfen und umschalten
-                if (currentColor === "rgb(28, 30, 33)") {  // Entspricht #1C1E21 in RGB
-                    button.style.backgroundColor = "rgb(250,104,49)"; // Zu Orange wechseln
+                // Farbänderung basierend auf dem Zustand
+                if (buttonStates[buttonNumber] === 1) {
+                    button.style.backgroundColor = "#FA6831"; // Orange für "ein"
                 } else {
-                    button.style.backgroundColor = "rgb(28, 30, 33)"; // Zurück zu Dunkelgrau
+                    button.style.backgroundColor = "#1C1E21"; // Dunkelgrau für "aus"
                 }
+
+                // Du kannst hier den Zustand des Buttons an dein Python-Backend senden
+                console.log(`Button ${buttonNumber} ist jetzt ${buttonStates[buttonNumber] === 1 ? 'ein' : 'aus'}`);
             }
         </script>
 
@@ -95,16 +103,5 @@
     <footer>
         <p>&copy; 2024 Deine Webseite</p>
     </footer>
-
-    <script>
-        // JavaScript to send a request to the server when the button is clicked
-        document.getElementById('toggle-btn').addEventListener('click', function() {
-            fetch('/toggle_pin')
-                .then(response => response.text())
-                .then(data => {
-                    console.log(data);  // Output the response from the server
-                });
-        });
-    </script>
 </body>
 </html>
