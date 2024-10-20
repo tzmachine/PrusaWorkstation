@@ -5,7 +5,7 @@ server = Flask(__name__)
 
 # Konfiguriere die GPIO-Pins
 GPIO.setmode(GPIO.BCM)  # Nutze die BCM-Pin-Nummerierung
-gpio_pins = [17, 27, 22, 23]  # Beispiel-Pins für GPIO 1, 2, 3, 4
+gpio_pins = [6, 5, 12, 0]  # Beispiel-Pins für GPIO 1, 2, 3, 4
 for pin in gpio_pins:
     GPIO.setup(pin, GPIO.OUT)  # Setze alle Pins als Ausgang
 
