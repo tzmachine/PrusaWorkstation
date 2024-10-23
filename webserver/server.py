@@ -13,6 +13,16 @@ for pin in gpio_pins:
 def index():
  return render_template('index.html')
 
+@app.route('/get_gpio_states', methods=['GET'])
+def get_gpio_states():
+    gpio_states = {
+        'gpio27': GPIO.input(27),
+        'gpio17': GPIO.input(17),
+        'gpio22': GPIO.input(22),
+        'gpio23': GPIO.input(23)
+    }
+    return jsonify(gpio_states)
+
 @server.route('/toggle_gpio/<int:pin_number>', methods=['POST'])
 def toggle_gpio(pin_number):
 # Überprüfe, ob die pin_number in der Liste gpio_pins ist
