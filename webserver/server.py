@@ -9,17 +9,25 @@ gpio_pins = [6, 12, 5, 0]  # Beispiel-Pins für GPIO 1, 2, 3, 4
 for pin in gpio_pins:
     GPIO.setup(pin, GPIO.OUT)  # Setze alle Pins als Ausgang
 
+GPIO.setup(0, GPIO.HIGH)
+
 @server.route('/')
 def index():
- return render_template('index.html')
+    gpio_states = {
+        'gpio6': GPIO.input(6),
+        'gpio12': GPIO.input(12),
+        'gpio5': GPIO.input(5),
+        'gpio0': GPIO.input(0)
+    }
+    return render_template('index.html', gpio_states=gpio_states)
 
-@app.route('/get_gpio_states', methods=['GET'])
+@server.route('/get_gpio_states', methods=['GET'])
 def get_gpio_states():
     gpio_states = {
-        'gpio27': GPIO.input(27),
-        'gpio17': GPIO.input(17),
-        'gpio22': GPIO.input(22),
-        'gpio23': GPIO.input(23)
+        'gpio6': GPIO.input(6),
+        'gpio12': GPIO.input(12),
+        'gpio5': GPIO.input(5),
+        'gpio0': GPIO.input(0)
     }
     return jsonify(gpio_states)
 
