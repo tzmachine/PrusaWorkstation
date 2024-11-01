@@ -6,3 +6,6 @@ This Raspberry Pi 5 hosts a webserver to give control of the PrusaWorkstation. I
 ## PrusaWorkstation v1.0
 added webserver with four buttons to control custom GPIO
 added PrusaConnect Webcam API
+
+## PrusaWorkstation v2.0
+changed webserver to apache with php, functionality will be preserved.
