@@ -74,7 +74,22 @@
         <h3>GPIO Control</h3>
     </header>
     <script>
-        function togglePin(pin) {
+        //button states
+        var buttonStates = {
+                6: 0, // Button 1
+                12: 0, // Button 2
+                5: 0, // Button 3
+                0: 0  // Button 4
+            };
+
+        function togglePin(pin, buttonID) {
+
+            //get button element and switch state based on current value
+            var button = document.getElementById(buttonID);
+            buttonStates[pin] = buttonStates[pin] === 0 ? 1 : 0;
+            updateButtonColor(button, buttonStates[pin]);
+
+            //create GET command based on function input anmd send it to index.php
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "index.php?pin=" + pin + "&action=toggle", true);
             xhr.onreadystatechange = function () {
@@ -87,44 +102,15 @@
         }
     </script>
     <section>
-        <button id="btn1" onclick="togglePin(6)">GPIO 1</button>
-        <button id="btn2" onclick="togglePin(12)">GPIO 2</button>
-        <button id="btn3" onclick="togglePin(5)">GPIO 3</button>
-        <button id="btn4" onclick="togglePin(0)">GPIO 4</button>
+        <button id="btn1" onclick="togglePin(6, 'btn1')">GPIO 1</button>
+        <button id="btn2" onclick="togglePin(12, 'btn2')">GPIO 2</button>
+        <button id="btn3" onclick="togglePin(5, 'btn3')">GPIO 3</button>
+        <button id="btn4" onclick="togglePin(0, 'btn4')">GPIO 4</button>
 
         <script>
             // Status der Buttons (1 = ein, 0 = aus)
-            var buttonStates = {
-                6: 0, // Button 1
-                12: 0, // Button 2
-                5: 0, // Button 3
-                0: 0  // Button 4
-            };
-
-            // Funktion zum Umschalten des Button-Zustands
-            function toggleButton(buttonId, buttonNumber) {
-                var button = document.getElementById(buttonId);
-
-                // Umschalten des Zustands (0 = aus, 1 = ein)
-                buttonStates[buttonNumber] = buttonStates[buttonNumber] === 0 ? 1 : 0;
-
-                // Farbänderung basierend auf dem Zustand
-                updateButtonColor(button, buttonStates[buttonNumber]);
-
-                // Sende den Zustand des Buttons an das Python-Backend
-                fetch(`/toggle_gpio/${buttonNumber}`, {
-                    method: 'POST'
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(`Button ${buttonNumber} ist jetzt ${buttonStates[buttonNumber] === 1 ? 'ein' : 'aus'}`);
-                    })
-                    .catch(error => {
-                        console.error('Fehler:', error);
-                    });
-            }
-
-            // Funktion, um die Button-Farbe basierend auf dem Zustand zu ändern
+            
+            // function to switch color based on current state
             function updateButtonColor(button, state) {
                 if (state === 1) {
                     button.style.backgroundColor = "#FA6831"; // Orange für "ein"
