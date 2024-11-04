@@ -2,8 +2,8 @@ import sys
 import RPi.GPIO as GPIO
 
 # GPIO-Pin-Nummer aus den Argumenten lesen
-#pin = int(sys.argv[1])
-pin = 6
+pin = int(sys.argv[1])
+
 # GPIO-Modus setzen
 GPIO.setmode(GPIO.BCM)  # BCM-Nummerierung verwenden
 
