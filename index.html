@@ -68,6 +68,18 @@
     <section>
         <h2>Chamber Temperature</h2>
         <div class="temperature">Current Temperature</div>
+        <input type="range" min="20" max="40" value="30" id="cham_temp"></input>
+        <output id="temp_target"></output>
+        <script>
+            var slider = document.getElementById("cham_temp");
+            var output = document.getElementById("temp_target");
+            output.innerHTML = slider.value; // Display the default slider value
+
+            // Update the current slider value (each time you drag the slider handle)
+            slider.oninput = function() {
+                output.innerHTML = this.value;
+            }
+        </script>
     </section>
 
     <header>
@@ -107,15 +119,13 @@
         <button id="btn3" onclick="togglePin(5, 'btn3')">GPIO 3</button>
         <button id="btn4" onclick="togglePin(0, 'btn4')">GPIO 4</button>
 
-        <script>
-            // Status der Buttons (1 = ein, 0 = aus)
-            
+        <script>            
             // function to switch color based on current state
             function updateButtonColor(button, state) {
                 if (state === 1) {
-                    button.style.backgroundColor = "#FA6831"; // Orange für "ein"
+                    button.style.backgroundColor = "#FA6831";
                 } else {
-                    button.style.backgroundColor = "#1C1E21"; // Dunkelgrau für "aus"
+                    button.style.backgroundColor = "#1C1E21";
                 }
             }
 
