@@ -69,17 +69,24 @@
         <h2>Chamber Temperature</h2>
         <div class="temperature">Current Temperature</div>
         <input type="range" min="20" max="40" value="30" id="cham_temp"></input>
-        <output id="temp_target"></output>
-        <script>
-            var slider = document.getElementById("cham_temp");
-            var output = document.getElementById("temp_target");
-            output.innerHTML = slider.value; // Display the default slider value
-
-            // Update the current slider value (each time you drag the slider handle)
-            slider.oninput = function() {
-                output.innerHTML = this.value;
-            }
-        </script>
+        <div>
+        	<output id="temp_target"></output>
+            <button id="setCTemp" onclick="setCTemp()">set</button>
+        	<script>
+            	var slider = document.getElementById("cham_temp");
+            	var output = document.getElementById("temp_target");
+            	output.innerHTML = slider.value; // Display the default slider value
+            	// Update the current slider value (each time you drag the slider handle)
+            	slider.oninput = function() {
+                	output.innerHTML = this.value;
+            	}
+                
+               	function setCTemp() {
+                	var target_temp = document.getElementById("cham_temp");	//get slider element
+                    console.log(target_temp.value);							//print slider value on button press in console
+                }
+        	</script>
+        </div>
     </section>
 
     <header>
